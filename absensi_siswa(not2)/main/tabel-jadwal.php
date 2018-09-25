@@ -14,12 +14,12 @@
 				<table id="user_data" class="table table-bordered table-striped" style="width: 100%;">
 					<thead>
 						<tr>
-							<th width="5%">NIS</th>
+							<th width="6%">NIS</th>
 							<th width="25%">Nama</th>
 							<th width="10%">Kelas</th>
 							<!--<th width="10%">Keterangan</th>
 							<th width="2.5%">Edit</th>-->
-							<th width="2.5%">Aksi</th>
+							<th width="9%">Aksi</th>
 						</tr>
 					</thead>
 				</table>
@@ -46,8 +46,8 @@
 					<input type="text" name="nama_siswa" id="nama_siswa" class="form-control" autofocus>
 					<br />
 
-					<label for="sel1"> Kelas : </label>
-							<select class="form-control" id="kelas_siswa" name="kelas_siswa" id="sel1" required>
+					<label for="kelas_siswa"> Kelas : </label>
+							<select class="form-control" id="kelas_siswa" name="kelas_siswa" required>
 								<option>X - RPL</option>
 								<option>XI - RPL</option>
 								<option>XII - RPL</option>
@@ -72,29 +72,29 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title2">Absen Siswa</h4>
+					<h4 class="modal-title_absen">Absen Siswa</h4>
 				</div>
-				<label for="tgl_absen">Tanggal Absen(thn-bln-tgl)</label>
-					<input type="text" name="tgl_absen" id="tgl_absen" class="form-control" value="<?php 
-					$d=strtotime("today");
-					echo date("Y-m-d", $d); 
-					?>" readonly="true" required />
+				<div class="modal-body">
+					<label>NIS</label>
+					<input type="text" name="nis_siswa" id="nis_siswa" class="form-control" readonly="true" autofocus>
+					<br />
+
+					<label for="tgl_absen">Tanggal Absen(thn-bln-tgl)</label>
+					<input type="date" name="tgl_absen" id="tgl_absen" class="form-control" required />
 					<br />
 
 					<label for="alasan_siswa">Keterangan</label>
-					<select class="form-control" id="kelas_siswa" name="alasan_absen" id="alasan_absen" required>
+					<select class="form-control" id="alasan_absen" name="alasan_absen" id="alasan_absen" required>
 							<option>Alpha</option>
 							<option>Izin</option>
 							<option>Sakit</option>
 						</select>
-					<input type="text" name="alasan_absen" id="alasan_absen" class="form-control" required />
-					<br />
 
 				</div>
 				<div class="modal-footer">
 					<input type="hidden" name="id_siswa" id="id_siswa" />
-					<input type="hidden" name="operation2" id="operation2" />
-					<input type="submit2" name="action2" id="action2" class="btn btn-success2" value="Tambah" />
+					<input type="hidden" name="operation2" id="operation2" value="absen"/>
+					<input type="submit" name="action2" id="action2" class="btn btn-success" value="absen" />
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
@@ -106,12 +106,11 @@
 $(document).ready(function(){
 	$('#add_button').click(function(){
 		$('#user_form')[0].reset();
-		$('.modal-title').text("Add User");
+		$('.modal-title').text("Tambah Siswa");
 		$('#action').val("Add");
-		$('#operation').val("Add");
-		
+		$('#operation').val("Add");		
 	});
-	
+
 	var dataTable = $('#user_data').DataTable({
 		"processing":true,
 		"serverSide":true,
@@ -135,9 +134,9 @@ $(document).ready(function(){
 	$(document).on('submit', '#user_form', function(event){
 		event.preventDefault();
 		var nama_siswa = $('#nama_siswa').val();
-		var tanggal = $('#tgl_absen').val();
+		var nis_siswa = $('#nis_sisw').val();
 			
-		if(nama_siswa != '' && tgl_absen != '')
+		if(nama_siswa != '' && nis_siswa != '')
 		{
 			$.ajax({
 				url:"main/crud/insert.php",
@@ -156,7 +155,7 @@ $(document).ready(function(){
 		}
 		else
 		{
-			alert("Both Fields are Required");
+			alert("Data Harap di Isi");
 		}
 	});
 
@@ -165,7 +164,7 @@ $(document).ready(function(){
 	// Script Edit---
 
 	$(document).on('click', '.update', function(){
-		var id_siswa = $(this).attr("siswa");
+		var id_siswa = $(this).attr("id_siswa");
 		$.ajax({
 			url:"main/crud/fetch_single.php",
 			method:"POST",
@@ -181,8 +180,8 @@ $(document).ready(function(){
 				$('.modal-title').text("Edit User");
 				$('#id_siswa').val(id_siswa);
 				
-				$('#action').val("Edit");
-				$('#operation').val("Edit");
+				$('#action').val("Update");
+				$('#operation').val("Update");
 			}
 		})
 	});
@@ -191,15 +190,15 @@ $(document).ready(function(){
 
 	// Absen Script-------------------
 
-	$(document).on('submit2', '#user_form_absen', function(event){
+/*	$(document).on('submit', '#user_form_absen', function(event){
 		event.preventDefault();
 		var nama_siswa = $('#nama_siswa').val();
-		var tanggal = $('#tgl_absen').val();
+		var nis_siswa = $('#nis_absen').val();
 			
-		if(nama_siswa != '' && tgl_absen != '')
+		if(nama_siswa != '' && nis_siswa != '')
 		{
 			$.ajax({
-				url:"main/crud/insert.php",
+				url:"main/crud/absen.php",
 				method:'POST',
 				data:new FormData(this),
 				contentType:false,
@@ -215,11 +214,36 @@ $(document).ready(function(){
 		}
 		else
 		{
-			alert("Both Fields are Required");
+			alert("Harus di Isi !");
 		}
-	});
+	}); */
 
-	// End Insert Script---------------
+	$(document).on('click', '.absen', function(){
+		var id_siswa = $(this).attr("id_siswa");
+		$.ajax({
+			url:"main/crud/fetch_single.php",
+			method:"POST",
+			data:{id_siswa:id_siswa},
+			dataType:"json",
+			success:function(data)
+			{
+				$('#userModal_absen').modal('show');
+				$('#nis_siswa').val(data.nis_siswa);
+				$('#nama_siswa').val(data.nama_siswa);
+				$('#kelas_siswa').val(data.kelas_siswa);
+				$('#tgl_absen').val(data.tgl_absen);
+				$('#alasan_absen').val(data.alasan_absen);
+				$('.modal-title').text("Absen Siswa");
+				$('#id_siswa').val(id_siswa);
+				
+				$('#action2').val("absen");
+				$('#operation2').val("absen");
+			}
+		})
+	});
+	
+
+	// End Absen Script---------------
 
 	// Delete Script------------------
 	

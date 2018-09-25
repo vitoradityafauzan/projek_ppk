@@ -5,7 +5,7 @@ if(isset($_POST["id_siswa"]))
 {
 	$output = array();
 	$statement = $connection->prepare(
-		"SELECT * FROM tbl_absen 
+		"SELECT * FROM tbl_siswa 
 		WHERE id_siswa = '".$_POST["id_siswa"]."' 
 		LIMIT 1"
 	);

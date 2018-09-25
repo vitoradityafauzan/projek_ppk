@@ -1,12 +1,12 @@
 <?php
 include('db.php');
 include('function.php');
-if(isset($_POST["id_siswa"]))
+if(isset($_POST["id_absen"]))
 {
 	$output = array();
 	$statement = $connection->prepare(
 		"SELECT * FROM tbl_absen 
-		WHERE id_siswa = '".$_POST["id_siswa"]."' 
+		WHERE id_absen = '".$_POST["id_absen"]."' 
 		LIMIT 1"
 	);
 	$statement->execute();

@@ -12,7 +12,7 @@ Main sidebar
 
 .left-sidebar {
     position: absolute;
-    width: 260px;
+    width: 200px;
     height: 100%;
     top: 0px;
     z-index: 20;
@@ -154,7 +154,7 @@ sidebar navigation
 When click on sidebar toggler and also for tablet
 *****************/
 
-@media(min-width:768px) {
+@media(min-width:568px) {
     .mini-sidebar .sidebar-nav #sidebarnav li {
         position: relative;
     }
@@ -162,7 +162,7 @@ When click on sidebar toggler and also for tablet
         position: absolute;
         left: 70px;
         top: 46px;
-        width: 220px;
+        width: 200px;
         padding-bottom: 10px;
         z-index: 1001;
         background: $sidebar-alt;
@@ -218,7 +218,7 @@ When click on sidebar toggler and also for tablet
             width: 70px;
         }
         .sidebar-nav #sidebarnav > li:hover > a {
-            width: 290px;
+            width: 200px;
             background: $sidebar-alt;
             .hide-menu {
                 display: inline;
@@ -230,14 +230,14 @@ When click on sidebar toggler and also for tablet
     }
 }
 
-@media(max-width:767px) {
+@media(max-width:567px) {
     .mini-sidebar {
         .left-sidebar {
             position: fixed;
         }
         .left-sidebar,
         .sidebar-footer {
-            left: -260px;
+            left: -200px;
         }
         &.show-sidebar {
             .left-sidebar,

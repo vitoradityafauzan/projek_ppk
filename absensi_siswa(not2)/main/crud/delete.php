@@ -7,7 +7,7 @@ if(isset($_POST["id_siswa"]))
 {
 	
 	$statement = $connection->prepare(
-		"DELETE FROM tbl_absen WHERE id_siswa = :id_siswa"
+		"DELETE FROM tbl_siswa WHERE id_siswa = :id_siswa"
 	);
 	$result = $statement->execute(
 		array(

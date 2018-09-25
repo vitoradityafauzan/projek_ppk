@@ -741,7 +741,7 @@ Layouts
 
 .fix-width {
   width: 100%;
-  max-width: 1170px;
+  max-width: 1070px;
   margin: 0 auto; }
 
 /*
@@ -755,7 +755,7 @@ Main sidebar
 ******************/
 .left-sidebar {
   position: absolute;
-  width: 260px;
+  width: 200px;
   height: 100%;
   top: 0px;
   z-index: 20;

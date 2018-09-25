@@ -156,7 +156,7 @@ $(document).ready(function(){
 	// End Insert Script---------------
 	
 	// Script Edit---
-/*
+
 	$(document).on('click', '.update', function(){
 		var id_siswa = $(this).attr("id_siswa");
 		$.ajax({
@@ -170,8 +170,6 @@ $(document).ready(function(){
 				$('#nis_siswa').val(data.nis_siswa);
 				$('#nama_siswa').val(data.nama_siswa);
 				$('#kelas_siswa').val(data.kelas_siswa);
-				$('#tgl_absen').val(data.tgl_absen);
-				$('#alasan_absen').val(data.alasan_absen);
 				$('.modal-title').text("Edit User");
 				$('#id_siswa').val(id_siswa);
 				
@@ -181,7 +179,7 @@ $(document).ready(function(){
 		})
 	});
 
-	// End Edit Script------ */
+	// End Edit Script------ 
 
 	// Delete Script------------------
 	
